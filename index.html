@@ -22,9 +22,13 @@
         const response = await fetch(url)
         const result = await response.json()
         
-        result.items.forEach(i=>{
-            
-            divResult.appendChild(document.createTextNode(i.full_name))
+         result.items.forEach(i=>{
+            const anchor = document.createElement("a")
+            anchor.href = i.html_url;
+            anchor.textContent = i.full_name;
+            divResult.appendChild(anchor)
+            divResult.appendChild(document.createElement("br"))
+        })
 
       })
     </script>
