@@ -7,9 +7,10 @@
     <title>github</title>
 </head>
 <body>
-    <h1>Github tutorial</h1>
+    <h1>Customized API</h1>
     <button id = 'btnRepos'>Repos</button>
     <button id = 'btnIssues'>Issues</button>
+    <button id = 'btnCommits'>Commits</button>
     <div id = 'divResult'>
 
     </div>
@@ -17,9 +18,11 @@
     <script>
     const btnRepos = document.getElementById("btnRepos")
     const btnIssues = document.getElementById("btnIssues")
+    const btnCommits = document.getElementById("btnCommits")
     const divResult = document.getElementById("divResult")
     btnRepos.addEventListener("click", getRepos)
     btnIssues.addEventListener("click", getIssues)
+    btnCommits.addEventListener("click", getCommits)
     async function getRepos() {
         clear();
         const url = "https://api.github.com/search/repositories?q=stars:100000..300000"
@@ -45,6 +48,29 @@
             const anchor = document.createElement("a")
             anchor.href = i.html_url;
             anchor.textContent = i.title;
+            divResult.appendChild(anchor)
+            divResult.appendChild(document.createElement("br"))
+        })
+         
+      }
+        
+        sync function getCommits() {
+        clear();
+        const url = "https://api.github.com/search/commits?q=repo:sandesh2027/new-repo"
+       
+        const headers = {
+            "Accept" : "application/vnd.github.cloak-preview"
+        }
+        const response = await fetch(url, {
+            "method" : "GET",
+            "headers" : headers
+        
+        const result = await response.json()
+        
+         result.items.forEach(i=>{
+            const anchor = document.createElement("a")
+            anchor.href = i.html_url;
+            anchor.textContent = i.commit.message;
             divResult.appendChild(anchor)
             divResult.appendChild(document.createElement("br"))
         })
