@@ -44,7 +44,7 @@
          result.items.forEach(i=>{
             const anchor = document.createElement("a")
             anchor.href = i.html_url;
-            anchor.textContent = i.full_name;
+            anchor.textContent = i.title;
             divResult.appendChild(anchor)
             divResult.appendChild(document.createElement("br"))
         })
